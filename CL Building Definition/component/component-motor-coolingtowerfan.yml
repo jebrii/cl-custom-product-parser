@@ -1,0 +1,26 @@
+template_type: component
+type: Motor
+subtype: CoolingTowerFan
+properties:
+  nameplate_hp:
+    type: number
+    collection_hint: field
+  max_power_kw:
+    type: number
+    collection_hint: office
+  power_factor:
+    type: number
+    collection_hint: field
+  volt:
+    type: number
+    collection_hint: field
+  index:
+    type: number
+    collection_hint: field
+measurement_points:
+  - loop_point_type: CTF
+    measurement_type: I
+  - loop_point_type: CTF
+    measurement_type: P
+  - loop_point_type: Motor
+    measurement_type: Motor_Pcnt_On

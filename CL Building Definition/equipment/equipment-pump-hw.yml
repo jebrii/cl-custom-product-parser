@@ -1,0 +1,28 @@
+template_type: equipment
+type: Pump
+subtype: Hw
+properties:
+  index:
+    type: number
+    collection_hint: field
+  dp_pump_curve:
+    type: string
+    collection_hint: office
+  dp_setpoint:
+    type: number
+    collection_hint: office
+  eff_pump_curve:
+    type: string
+    collection_hint: office
+  pump_speed_hz:
+    type: number
+    collection_hint: field
+  gpm_pump_curve:
+    type: string
+    collection_hint: office
+measurement_points:
+  - loop_point_type: HWP
+    measurement_type: P
+child_components:
+  Motor:
+    HwPump: "Hw_Pump_Motor-1"

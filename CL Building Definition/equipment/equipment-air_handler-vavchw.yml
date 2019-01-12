@@ -1,0 +1,70 @@
+template_type: equipment
+type: AHU
+subtype: VavChw
+properties:
+  cooling_efficiency_metric:
+    type: enumeration
+    values:
+      - kw_ton
+      - iplv_nplv
+      - cop
+      - eer_seer
+      - chilled_water
+    default: chilled_water
+    collection_hint: office
+  cooling_efficiency_value:
+    type: number
+    collection_hint: office
+    default: 0
+  sf_control_hardware:
+    type: enumeration
+    values:
+      - vfd
+      - discharge_dampers
+      - inlet_guide_vanes
+      - variable_pitch
+    collection_hint: field
+  rfpef_control_hardware:
+    type: enumeration
+    values:
+      - vfd
+      - discharge_dampers
+      - inlet_guide_vanes
+      - variable_pitch
+    collection_hint: field
+  control_strategy:
+    type: enumeration
+    values:
+      - static_dsp_setpoint
+      - dsp_reset
+    collection_hint: field
+  econ_damper_control:
+  #team_hint: BIG
+    type: enumeration
+    values:
+      - complementary
+      - sequenced
+    default: complementary
+measurement_points:
+  - loop_point_type: RA
+    measurement_type: T
+  - loop_point_type: RA
+    measurement_type: RH
+  - loop_point_type: Total
+    measurement_type: P
+  - loop_point_type: SF
+    measurement_type: Pl
+child_components:
+  Fan:
+    Supply: "SF-1"
+    RFPEF: "RFPEF-1"
+  CoolingCoil:
+    CHW: "CHW_CC-1"
+  Damper:
+    OA: "OA_Damper-1"
+    RA: "RA_Damper-1"
+  Motor:
+    Supply: "SF_Motor-1"
+    RFPEF: "RFPEF_Motor-1"
+  HeatingCoil:
+    Preheat: "Preheat_Coil-1"

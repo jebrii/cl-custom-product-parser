@@ -1,0 +1,54 @@
+template_type: equipment
+type: Chiller
+subtype: Default
+properties:
+  max_kw:
+    type: number
+    collection_hint: office
+  capacity_ref:
+    type: number
+    collection_hint: field
+  efficiency_curve:
+    type: string
+    collection_hint: office
+  chwst_ref:
+    type: number
+    collection_hint: office
+  load_at_efficiency_curve:
+    type: string
+    default: '0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9'
+    collection_hint: office
+  vfd:
+    type: boolean
+    collection_hint: field
+  power_factor:
+    type: number
+    collection_hint: field
+  volt:
+    type: number
+    collection_hint: field
+  percent_kWton_delta_per_degF:
+    type: number
+    collection_hint: office
+  index:
+    type: number
+    collection_hint: field
+  min_chw_flow:
+    type: number
+    collection_hint: office
+measurement_points:
+  - loop_point_type: CH
+    measurement_type: I
+  - loop_point_type: CH
+    measurement_type: P
+child_components:
+  Evaporator:
+    Default: "Evaporator-1"
+  Compressor:
+    Default: "Compressor-1"
+  Condenser:
+    Default: "Condenser-1"
+  ExpansionValve:
+    Default: "Expansion_Valve-1"
+  Motor:
+    Compressor: "Compressor_Motor-1"

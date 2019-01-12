@@ -1,0 +1,34 @@
+# team_hint: BIG
+template_type: equipment
+type: Transformer
+subtype: Default
+properties:
+  nameplate_kVA:
+    type: number
+    collection_hint: field
+  manufactured_year:
+    type: enumeration
+    values:
+      - pre_2005
+      - post_2005
+    collection_hint: field
+  low_V_spot_check_kW_phaseA:
+    type: number
+    collection_hint: field
+  low_V_spot_check_kW_phaseB:
+    type: number
+    collection_hint: field
+  low_V_spot_check_kW_phaseC:
+    type: number
+    collection_hint: field
+  high_V_spot_check_kW_phaseA:
+    type: number
+    collection_hint: field
+  high_V_spot_check_kW_phaseB:
+    type: number
+    collection_hint: field
+  high_V_spot_check_kW_phaseC:
+    type: number
+    collection_hint: field
+measurement_points:
+child_components:

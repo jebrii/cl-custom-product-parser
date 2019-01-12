@@ -1,0 +1,47 @@
+template_type: equipment
+type: HeatingAHU
+subtype: Default
+properties:
+  heating_efficiency_as_fraction:
+    type: number
+    collection_hint: office
+  sf_control_hardware:
+    type: enumeration
+    values:
+      - vfd
+      - discharge_dampers
+      - inlet_guide_vanes
+      - variable_pitch
+    collection_hint: field
+  heating_source:
+    type: enumeration
+    values:
+      - natural_gas
+      - electric
+      - steam
+      - hot_water
+    collection_hint: field
+  control_strategy:
+    type: enumeration
+    values:
+      - static_dsp_setpoint
+      - dsp_reset
+    collection_hint: field
+measurement_points:
+  - loop_point_type: RA
+    measurement_type: T
+  - loop_point_type: RA
+    measurement_type: RH
+  - loop_point_type: SF
+    measurement_type: Pl
+  - loop_point_type: SA
+    measurement_type: T
+  - loop_point_type: SA
+    measurement_type: RH
+child_components:
+  Fan:
+    Supply: "HDSF-1"
+  Damper:
+    OA: "HDOA_Damper-1"
+  Motor:
+    Supply: "HDSF_Motor-1"

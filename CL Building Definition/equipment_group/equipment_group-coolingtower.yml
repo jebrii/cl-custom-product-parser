@@ -1,0 +1,24 @@
+template_type: equipment_group
+type: CoolingTower
+subtype: Default
+properties:
+  fan_cycling:
+    type: enumeration
+    values:
+      - fans_do_cycle
+      - fans_do_not_cycle
+    collection_hint: field
+measurement_points:
+  - loop_point_type: CWS
+    measurement_type: T
+  - loop_point_type: CWR
+    measurement_type: T
+  - loop_point_type: CWLoop
+    measurement_type: dT
+  - loop_point_type: CWLoop
+    measurement_type: Tons
+  - loop_point_type: Bypass
+    measurement_type: Pcnt_Open
+child_equipment:
+  CoolingTower:
+    Default: "Cooling_Tower-1"

@@ -1,0 +1,7 @@
+template_type: equipment
+type: TerminalBox
+subtype: NoReheat
+measurement_points:
+child_components:
+  Damper:
+    Terminal: "Terminal_Damper-1"

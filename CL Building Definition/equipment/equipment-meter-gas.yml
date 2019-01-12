@@ -1,0 +1,10 @@
+template_type: equipment
+type: Meter
+subtype: Gas
+properties:
+  index:
+    type: number
+measurement_points:
+  - loop_point_type: BldgGas
+    measurement_type: Therms
+child_components:

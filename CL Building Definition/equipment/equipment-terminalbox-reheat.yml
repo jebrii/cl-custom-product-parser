@@ -1,0 +1,11 @@
+template_type: equipment
+type: TerminalBox
+subtype: Reheat
+measurement_points:
+  - loop_point_type: DA
+    measurement_type: T
+child_components:
+  HeatingCoil:
+    Reheat: "Reheat_Coil-1"
+  Damper:
+    Terminal: "Reheated_Terminal_Damper-1"

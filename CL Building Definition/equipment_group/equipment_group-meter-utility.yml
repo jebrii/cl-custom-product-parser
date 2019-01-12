@@ -1,0 +1,50 @@
+template_type: equipment_group
+type: Meter
+subtype: Utility
+properties:
+  duomo_month:
+    type: string
+    collection_hint: office
+  duomo_elec_kWh:
+    type: string
+    collection_hint: office
+  duomo_elec_dollars:
+    type: string
+    collection_hint: office
+  duomo_elec_demand_kW:
+    type: string
+    collection_hint: office
+  duomo_elec_demand_dollars:
+    type: string
+    collection_hint: office
+  duomo_total_elec_bill_dollars:
+    type: string
+    collection_hint: office
+  duomo_gas_therm:
+    type: string
+    collection_hint: office
+  duomo_gas_dollars:
+    type: string
+    collection_hint: office
+  duomo_total_gas_bill_dollars:
+    type: string
+    collection_hint: office
+  duomo_steam_lbs_cond:
+    type: string
+    collection_hint: office
+  duomo_steam_energy_charges_dollars:
+    type: string
+    collection_hint: office
+  duomo_steam_demand_lb_per_hr:
+    type: string
+    collection_hint: office
+  duomo_steam_demand_charges_dollars:
+    type: string
+    collection_hint: office
+  duomo_total_steam_bill_dollars:
+    type: string
+    collection_hint: office
+measurement_points:
+child_equipment:
+  Meter:
+    Electric: "UtilityElectricMeter-1"

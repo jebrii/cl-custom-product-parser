@@ -1,0 +1,18 @@
+template_type: component
+type: Motor
+subtype: RFPEF
+properties:
+  nameplate_hp:
+    type: number
+    collection_hint: field
+  power_factor:
+    type: number
+    collection_hint: field
+  volt:
+    type: number
+    collection_hint: field
+measurement_points:
+  - loop_point_type: RFPEF
+    measurement_type: I
+  - loop_point_type: RFPEF
+    measurement_type: P
