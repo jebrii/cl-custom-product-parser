@@ -1,0 +1,11 @@
+template_type: component
+type: Condenser
+subtype: WaterCooled
+properties:
+  cwst_reference:
+    type: number
+    collection_hint: office
+  percent_kWton_delta_per_degF:
+    type: number
+    collection_hint: office
+measurement_points:

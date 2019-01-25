@@ -1,0 +1,26 @@
+template_type: component
+type: Fan
+subtype: Supply
+properties:
+  index:
+    type: number
+    collection_hint: field
+  max_cfm:
+    type: number
+    collection_hint: office
+  belt_type:
+    type: enumeration
+    values:
+      - none
+      - solid_v_belt
+      - notched_v_belt
+      - other
+    collection_hint: field
+  number_of_belts:
+    type: number
+    collection_hint: field
+measurement_points:
+  - loop_point_type: SF
+    measurement_type: Pl
+  - loop_point_type: SF
+    measurement_type: AirFlow

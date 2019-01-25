@@ -1,0 +1,192 @@
+{
+  "inputType": [
+    {
+      "value": 0,
+      "text": "Analog Input"
+    },
+    {
+      "value": 1,
+      "text": "Analog Output"
+    },
+    {
+      "value": 2,
+      "text": "Analog Value"
+    },
+    {
+      "value": 3,
+      "text": "Binary Input"
+    },
+    {
+      "value": 4,
+      "text": "Binary Output"
+    },
+    {
+      "value": 5,
+      "text": "Binary Value"
+    },
+    {
+      "value": 6,
+      "text": "Calendar"
+    },
+    {
+      "value": 7,
+      "text": "Command"
+    },
+    {
+      "value": 8,
+      "text": "Device"
+    },
+    {
+      "value": 9,
+      "text": "Event Enrollment"
+    },
+    {
+      "value": 10,
+      "text": "File"
+    },
+    {
+      "value": 11,
+      "text": "Group"
+    },
+    {
+      "value": 12,
+      "text": "Loop"
+    },
+    {
+      "value": 13,
+      "text": "Multi-state Input"
+    },
+    {
+      "value": 14,
+      "text": "Multi-state Output"
+    },
+    {
+      "value": 15,
+      "text": "Notification Class"
+    },
+    {
+      "value": 16,
+      "text": "Program"
+    },
+    {
+      "value": 17,
+      "text": "Schedule"
+    },
+    {
+      "value": 18,
+      "text": "Averaging"
+    },
+    {
+      "value": 19,
+      "text": "Multi-state Value"
+    },
+    {
+      "value": 20,
+      "text": "Trendlog"
+    },
+    {
+      "value": 21,
+      "text": "Life Safety Point"
+    },
+    {
+      "value": 22,
+      "text": "Life Safety Zone"
+    },
+    {
+      "value": 23,
+      "text": "Accumulator"
+    },
+    {
+      "value": 24,
+      "text": "Pulse Converter"
+    },
+    {
+      "value": 25,
+      "text": "Event Log"
+    },
+    {
+      "value": 26,
+      "text": "Global Group"
+    },
+    {
+      "value": 27,
+      "text": "Trendlog Multiple"
+    },
+    {
+      "value": 28,
+      "text": "Load Control"
+    },
+    {
+      "value": 29,
+      "text": "Structured View"
+    },
+    {
+      "value": 30,
+      "text": "Access Door"
+    },
+    {
+      "value": 31,
+      "text": "Timer"
+    }
+  ],
+  "typeOfData": [
+    {
+      "value": "STRING",
+      "text": "String"
+    },
+    {
+      "value": "FLOAT",
+      "text": "Float"
+    },
+    {
+      "value": "INTEGER",
+      "text": "Integer"
+    },
+    {
+      "value": "BOOLEAN",
+      "text": "Boolean"
+    },
+    {
+      "value": "PERCENT",
+      "text": "Percent"
+    },
+    {
+      "value": "CELSIUS",
+      "text": "Celsius"
+    },
+    {
+      "value": "FAHRENHEIT",
+      "text": "Fahrenheit"
+    },
+    {
+      "value": "ENUM",
+      "text": "Enumerated"
+    }
+  ],
+  "conversionData": [
+    {
+      "value": "CELSIUS_TO_FAHRENHEIT",
+      "text": "Celsius to Fahrenheit"
+    },
+    {
+      "value": "FAHRENHEIT_TO_CELSIUS",
+      "text": "Fahrenheit to Celsius"
+    },
+    {
+      "value": "MULTIPLY_BY_1000",
+      "text": "Multiply by 1000"
+    },
+    {
+      "value": "DIVIDE_BY_1000",
+      "text": "Divide by 1000"
+    },
+    {
+      "value": "ENUM",
+      "text": "Enumerated"
+    },
+    {
+      "value": "CUSTOM_FORMULA",
+      "text": "Custom Formula"
+    }
+  ]
+}

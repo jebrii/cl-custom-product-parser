@@ -1,0 +1,15 @@
+{
+  "name": "cl-custom-product-parser",
+  "version": "0.0.1",
+  "description": "create custom products with the Altair SmartEdge API using YAML file inputs from CL",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node index.js -t"
+  },
+  "author": "jebrii",
+  "license": "ISC",
+  "dependencies": {
+    "js-yaml": "^3.12.1"
+  }
+}
