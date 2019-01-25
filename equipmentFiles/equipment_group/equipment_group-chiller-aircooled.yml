@@ -1,6 +1,6 @@
 template_type: equipment_group
 type: Chiller
-subtype: Default
+subtype: AirCooled
 properties:
   variable_speed:
     type: boolean
@@ -18,4 +18,4 @@ measurement_points:
     measurement_type: Tons
 child_equipment:
   Chiller:
-    Default: "Chiller-1"
+    AirCooled: "Chiller-1"

@@ -1,0 +1,7 @@
+template_type: equipment_group
+type: AHU
+subtype: VavChw
+measurement_points:
+child_equipment:
+  AHU:
+    VavChw: "VAV_CHW-1"
