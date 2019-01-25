@@ -82,7 +82,7 @@ const makeDataLabel = function() {
 }
 
 const addDataLabels = function(parent, current, level) {
-  if (current.measurement_points !== null && current.measurement_points.length !== 0) {
+  if (current.measurement_points && current.measurement_points.length !== 0) {
     current.measurement_points.forEach(mp => {
       dataLabelStrings.loop_point_type = '_' + mp.loop_point_type.toUpperCase();
       // console.log('pushing label');
