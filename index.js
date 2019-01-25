@@ -33,7 +33,7 @@ const convertName = function(childObj) {
   }
   let originalName = Object.keys(childObj)[0];
   let subsets = Object.keys(childObj[originalName]);
-  console.log(`convertName found name: ${originalName} and subsets: ${subsets}`);
+  // console.log(`convertName found name: ${originalName} and subsets: ${subsets}`);
   subsets.push(''); // Make certain the following for loop runs at least once w/o a subset
   subsets.forEach(subset => {
     [true, false].forEach((i) => { // Once for true, once for false
@@ -72,12 +72,11 @@ const addDataLabels = function(parent, current, level) {
   if (current.measurement_points !== null && current.measurement_points.length !== 0) {
     current.measurement_points.forEach(mp => {
       dataLabelStrings.loop_point_type = '_' + mp.loop_point_type.toUpperCase();
-      console.log('pushing label');
+      // console.log('pushing label');
       if (!dataLabels.hasOwnProperty(parent)) {
         console.log('data labels does not have parent ' + parent + ', so I am making an empty object');
         dataLabels[parent] = [];
       }
-      console.log(dataLabels[parent]);
       dataLabels[parent].push({
         level,
         device: current.type + ' ' + current.subtype,
@@ -109,21 +108,11 @@ const testValidChildren = function(current, level) {
 const recurse = (levels, levelIndex, nameCue) => {
   let level = levels[levelIndex];
   let current = loadYamlFile(level, convertName(nameCue));
-
-  console.log('recurse with level:');
-  console.log(level);
-  console.log('...and current object:');
-  console.log(current);
-
   dataLabelStrings.setLabelString(current, level);
   addDataLabels(parent, current, level);
   if (testValidChildren(current, level)) {
     let children = current[getChildString(level)]
-    console.log('recurse children:')
-    console.log(children);
     Object.keys(children).forEach(key => {
-      console.log('children object:')
-      console.log(key + ': ' + children[key]);
       recurse(levels, levelIndex + 1, { [key]: children[key] });
     });
   }
@@ -178,43 +167,6 @@ startFiles.forEach(startFile => {
   addDataLabels(parent, current, level);
   recurse(levels, levelIndex + 1, current[getChildString(level)]);
 
-
-
-/*
-  // Check for children and iterate
-  let children = current.child_equipment;
-  console.log(children);
-  if (children !== undefined && Object.keys(children).length !== 0) {
-    Object.keys(children).forEach( child => {
-      level = levels[1];
-      let childObj = {};
-      childObj[child] = children[child]; // I'm certain there's a better way to do this...
-      current = loadYamlFile(level, convertName( childObj ));
-      // Make a new data label string level
-      dataLabelStrings.setLabelString(current, level);
-      // add data labels for the current equipment
-      addDataLabels(current);
-
-      let children = current.child_components;
-      console.log(children);
-      if (children !== undefined && Object.keys(children).length !== 0) {
-        Object.keys(children).forEach(child => {
-          level = levels[1];
-          let childObj = {};
-          childObj[child] = children[child]; // I'm certain there's a better way to do this...
-          current = loadYamlFile(level, convertName( childObj ));
-
-          // Make a new data label string level
-          let append = current.subtype == 'Default' ? '' : `-${current.subtype.toUpperCase()}`;
-          dataLabelStrings.equipment = '_' + current.type.toUpperCase() + append;
-          // add data labels for the current equipment
-          addDataLabels(current);
-        });
-    });
-  } else {
-      console.log('no children for ' + level + ' ' + current.type + ' ' + current.subtype);
-  }
-  */
 });
 console.log('All Done! Data labels:');
 console.log(dataLabels);
