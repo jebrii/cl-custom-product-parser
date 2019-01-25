@@ -13,14 +13,22 @@ String.prototype.replaceAtIndex = function(index, replacement) {
   return this.substr(0, index) + replacement + this.substr(index + replacement.length);
 }
 
-const loadYamlFile = function(level, names) {
+const findAndLoadYaml = function(level, names) {
   let doc;
   names.forEach((name) => {
-    try {
-      doc = yaml.safeLoad(fs.readFileSync(`${parentDir}/${level}/${level}-${name}.yml`, 'utf8'));
-      console.log(`found document at ${parentDir}/${level}/${level}-${name}.yml`);
-    } catch (e) {
-      // console.log(`could not find file at ./equipmentFiles/${level}/${level}-${name}.yml`)
+    if (name.includes('.yml')) { // Catches the first recursion level where startFile is already found by fs
+      try {
+        doc = yaml.safeLoad(fs.readFileSync(`${parentDir}/${level}/${name}`, 'utf8'));
+      } catch (e) {
+        // console.log(`could not find file at ./equipmentFiles/${level}/${level}-${name}.yml`)
+      }
+    } else { // All recursions below the top level, where we need to try potential options to find the file
+      try {
+        doc = yaml.safeLoad(fs.readFileSync(`${parentDir}/${level}/${level}-${name}.yml`, 'utf8'));
+        console.log(`found document at ${parentDir}/${level}/${level}-${name}.yml`);
+      } catch (e) {
+        // console.log(`could not find file at ./equipmentFiles/${level}/${level}-${name}.yml`)
+      }
     }
   });
   return doc ? doc : undefined;
@@ -29,7 +37,7 @@ const loadYamlFile = function(level, names) {
 const convertName = function(childObj) {
   let names = [];
   if (typeof childObj !== 'object') {
-    throw new Error('ERROR: expected an object passed to convertName()!');
+    return [ childObj ];
   }
   let originalName = Object.keys(childObj)[0];
   let subsets = Object.keys(childObj[originalName]);
@@ -40,6 +48,10 @@ const convertName = function(childObj) {
       let name = i ? originalName + ' ' + subset : subset + ' ' + originalName; // subset or name first, one for each iteration
       // === Below add all possible combinations that a file may have ===
       name = name.toLowerCase(); // all equipment files use lowercase
+      // files use 'air_handler' instead of 'AHU'
+      if (name.includes('ahu')) {
+        name = name.replace('ahu', 'air_handler');
+      }
       // try finding a file with no spaces or hyphens
       let noFluff = name.replace(' ', '');
       names.push(noFluff);
@@ -49,6 +61,7 @@ const convertName = function(childObj) {
       // try finding a file where the first space is a hyphen and the rest are removed
       let firstHyphen = name.replaceAtIndex(name.indexOf(' '), '-');
       names.push(firstHyphen.replace(' ', '')); // get rid of the remaining spaces
+
     });
   });
   uniqueNames = names.filter((item, pos) => names.indexOf(item) == pos); // Filter out repeat entries
@@ -73,8 +86,7 @@ const addDataLabels = function(parent, current, level) {
     current.measurement_points.forEach(mp => {
       dataLabelStrings.loop_point_type = '_' + mp.loop_point_type.toUpperCase();
       // console.log('pushing label');
-      if (!dataLabels.hasOwnProperty(parent)) {
-        console.log('data labels does not have parent ' + parent + ', so I am making an empty object');
+      if (!dataLabels.hasOwnProperty(parent)) { // If we haven't created an array for the parent to hold labels, make an empty one
         dataLabels[parent] = [];
       }
       dataLabels[parent].push({
@@ -86,7 +98,7 @@ const addDataLabels = function(parent, current, level) {
       });
     });
   } else {
-    console.log('No measurement points for ' + level + ' ' + current.type + ' ' + current.subtype);
+    // console.log('No measurement points for ' + level + ' ' + current.type + ' ' + current.subtype);
   }
 }
 
@@ -107,7 +119,14 @@ const testValidChildren = function(current, level) {
 
 const recurse = (levels, levelIndex, nameCue) => {
   let level = levels[levelIndex];
-  let current = loadYamlFile(level, convertName(nameCue));
+  let current = findAndLoadYaml(level, convertName(nameCue));
+  if (!current) {
+    console.log('Could not find file for ' + Object.keys(nameCue) + '!');
+    return;
+  }
+  if (levelIndex == 0) { // If we're at the equipment_group level, set the parent
+    parent = current.type + '_' + current.subtype;
+  }
   dataLabelStrings.setLabelString(current, level);
   addDataLabels(parent, current, level);
   if (testValidChildren(current, level)) {
@@ -151,22 +170,12 @@ if (testMode) {
 
 let startFiles = fs.readdirSync(`${parentDir}/${startDir}/`);
 
+let parent = '';
+
 // ==== execution ====
 
-let level = levels[levelIndex];
-let parent = '';
 startFiles.forEach(startFile => {
-  // Load file
-  current = yaml.safeLoad(fs.readFileSync(`${parentDir}/${startDir}/${startFile}`, 'utf8'));
-  // Set the parent for this recursive iteration
-  parent = current.type + '_' + current.subtype;
-  // Create the data label string for this file
-  let append = current.subtype == 'Default' ? '' : `-${current.subtype.toUpperCase()}`;
-  dataLabelStrings.equipment_group = '_' + current.type.toUpperCase() + append;
-  // Add measurement points to the list of data labels
-  addDataLabels(parent, current, level);
-  recurse(levels, levelIndex + 1, current[getChildString(level)]);
-
+  recurse(levels, levelIndex, startFile);
 });
 console.log('All Done! Data labels:');
 console.log(dataLabels);
