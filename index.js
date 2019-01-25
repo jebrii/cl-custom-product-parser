@@ -114,7 +114,7 @@ const getChildString = function(level) {
 }
 
 const testValidChildren = function(current, level) {
-  return current[getChildString(level)] !== undefined && Object.keys(getChildString(level)).length !== 0;
+  return current[getChildString(level)] && Object.keys(getChildString(level)).length !== 0;
 }
 
 const recurse = (levels, levelIndex, nameCue) => {
