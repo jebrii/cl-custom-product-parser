@@ -8,6 +8,35 @@ const fs = require('fs');
 
 
 // ==== functions ====
+const log = function() {
+  const colors = {
+    reset: "\x1b[0m",
+    bright: "\x1b[1m",
+    dim: "\x1b[2m",
+    black: "\x1b[30m",
+    red: "\x1b[31m",
+    green: "\x1b[32m",
+    yellow: "\x1b[33m",
+    blue: "\x1b[34m",
+    magenta: "\x1b[35m",
+    cyan: "\x1b[36m",
+    white: "\x1b[37m"
+  };
+  let logText = '';
+  for (let i = 0; i < arguments.length; i++) {
+    let newLogText = arguments[i].toString();
+    if (newLogText.includes('{{')) {
+      Object.keys(colors).forEach(color => {
+        if (newLogText.includes(`{{${color}}}`)) {
+          newLogText = newLogText.replace(`{{${color}}}`, colors[color]);
+        }
+      })
+    }
+    logText += newLogText + ' ';
+  }
+  console.log(logText, colors.reset);
+}
+
 String.prototype.replaceAtIndex = function(index, replacement) {
   // Used to replace characters at string indexes in convertName()
   return this.substr(0, index) + replacement + this.substr(index + replacement.length);
@@ -25,7 +54,7 @@ const findAndLoadYaml = function(level, names) {
     } else { // All recursions below the top level, where we need to try potential options to find the file
       try {
         doc = yaml.safeLoad(fs.readFileSync(`${parentDir}/${level}/${level}-${name}.yml`, 'utf8'));
-        console.log(`found document at ${parentDir}/${level}/${level}-${name}.yml`);
+        log('{{green}}','Found file', '{{reset}}', `at ${parentDir}/${level}/${level}-${name}.yml`);
       } catch (e) {
         // console.log(`could not find file at ./equipmentFiles/${level}/${level}-${name}.yml`)
       }
@@ -121,7 +150,7 @@ const recurse = (levels, levelIndex, nameCue) => {
   let level = levels[levelIndex];
   let current = findAndLoadYaml(level, convertName(nameCue));
   if (!current) {
-    console.log('Could not find file for ' + Object.keys(nameCue) + '!');
+    log('{{red}}','Could not find file', '{{reset}}', 'for', Object.keys(nameCue), '!');
     return;
   }
   if (levelIndex == 0) { // If we're at the equipment_group level, set the parent
@@ -177,5 +206,7 @@ let parent = '';
 startFiles.forEach(startFile => {
   recurse(levels, levelIndex, startFile);
 });
-console.log('All Done! Data labels:');
+log();
+log('All Done! Data labels:');
+log();
 console.log(dataLabels);
