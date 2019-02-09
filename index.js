@@ -5,6 +5,7 @@ let testMode = process.argv.includes('-t') ? true : false;
 // ==== imports ====
 const yaml = require('js-yaml');
 const fs = require('fs');
+const prompts = require('prompts');
 
 
 // ==== functions ====
@@ -23,16 +24,19 @@ const log = function() {
     white: "\x1b[37m"
   };
   let logText = '';
+  let space;
   for (let i = 0; i < arguments.length; i++) {
+    space = true;
     let newLogText = arguments[i].toString();
     if (newLogText.includes('{{')) {
       Object.keys(colors).forEach(color => {
         if (newLogText.includes(`{{${color}}}`)) {
           newLogText = newLogText.replace(`{{${color}}}`, colors[color]);
+          space = false;
         }
       })
     }
-    logText += newLogText + ' ';
+    logText += space ? newLogText + ' ' : newLogText;
   }
   console.log(logText, colors.reset);
 }
@@ -150,7 +154,7 @@ const recurse = (levels, levelIndex, nameCue) => {
   let level = levels[levelIndex];
   let current = findAndLoadYaml(level, convertName(nameCue));
   if (!current) {
-    log('{{red}}','Could not find file', '{{reset}}', 'for', Object.keys(nameCue), '!');
+    log('{{red}}','Could not find file', '{{reset}}', ' for', Object.keys(nameCue), '!');
     return;
   }
   if (levelIndex == 0) { // If we're at the equipment_group level, set the parent
@@ -187,7 +191,7 @@ let dataLabelStrings = {
   }
 }
 
-let dataLabels = []; // Object for storing the data labels as they are generated
+let dataLabels = {}; // Object for storing the data labels as they are generated
 let deviceStructure = {}; // Object for human reference of the parsed hierarchy
 
 let startDir;
@@ -207,6 +211,65 @@ startFiles.forEach(startFile => {
   recurse(levels, levelIndex, startFile);
 });
 log();
-log('All Done! Data labels:');
-log();
-console.log(dataLabels);
+log('All Done!');
+
+
+
+
+
+(async function () {
+  log('How would you like the data labels?');
+  let output = await prompts({
+    type: 'text',
+    name: 'type',
+    message: 'Print in console (p), Save to file (s), Do nothing (x)',
+    initial: 'p'
+  });
+  let outputted = false;
+  while (!outputted) {
+    switch (output.type.toLowerCase()) {
+      case 'p':
+        console.log(dataLabels);
+        outputted = true;
+        break;
+      case 's':
+        let timestamp = new Date().toISOString().toString().substring(0,19);
+        let fileLocation = await prompts({
+          type: 'text',
+          name: 'file',
+          message: 'Enter the location for the ouput file: ',
+          initial: `./outputs/output-${timestamp}.json`
+        });
+
+        console.log('is it here?', dataLabels.length)
+        fs.writeFile(fileLocation.file, JSON.stringify(dataLabels), function (err) {
+
+          if (err) throw err;
+          log('{{green}}', 'Saved Successfully!');
+        });
+
+
+        outputted = true;
+        break;
+      case 'x':
+        let confirm = await prompts({
+          type: 'text',
+          name: 'value',
+          message: 'Are you sure? (y/n)',
+        });
+        if (confirm.value.toLowerCase() == 'y') {
+          outputted = true;
+        } else if (confirm.value.toLowerCase() == 'n') {
+          output = await prompts({
+            type: 'text',
+            name: 'type',
+            message: 'Print in console (p), Save to file (s), Do nothing (x)',
+            initial: 'p'
+          });
+        }
+        break;
+      default:
+        log("I didn't recognize that input.")
+    }
+  }
+})();
