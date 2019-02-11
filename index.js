@@ -125,7 +125,7 @@ const addDataLabels = function(parent, current, level) {
       }
       dataLabels[parent].push({
         // level,
-        device: current.type + ' ' + current.subtype,
+        label: current.type + ' ' + current.subtype,
         dataLabel: makeDataLabel(),
         inputType: mp.loop_point_type,
         unit: convertUnit(mp.measurement_type)
