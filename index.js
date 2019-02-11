@@ -109,6 +109,10 @@ const convertUnit = function(unit) {
   return unit; // Change this when implemented correctly
 }
 
+const convertInputType = function(inputType) {
+  return inputType; // Change this when implemented correctly
+}
+
 const makeDataLabel = function() {
   let dataLabelString = 'DL' + dataLabelStrings.equipment_group + (dataLabelStrings.equipment == dataLabelStrings.equipment_group ? '' : dataLabelStrings.equipment) + dataLabelStrings.component + dataLabelStrings.loop_point_type;
   dataLabelStrings.usedDLSs.push(dataLabelString);
@@ -127,8 +131,8 @@ const addDataLabels = function(parent, current, level) {
         // level,
         label: current.type + ' ' + current.subtype,
         dataLabel: makeDataLabel(),
-        inputType: mp.loop_point_type,
-        unit: convertUnit(mp.measurement_type)
+        inputType: convertInputType(mp.loop_point_type),
+        dataType: convertUnit(mp.measurement_type)
       });
     });
   } else {
