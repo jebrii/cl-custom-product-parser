@@ -106,10 +106,11 @@ const convertUnit = function(unit) {
     case 'T':
       return 'TEMP'
   }
+  return unit; // Change this when implemented correctly
 }
 
 const makeDataLabel = function() {
-  let dataLabelString = 'DL' + dataLabelStrings.equipment_group + dataLabelStrings.equipment + dataLabelStrings.component + dataLabelStrings.loop_point_type;
+  let dataLabelString = 'DL' + dataLabelStrings.equipment_group + (dataLabelStrings.equipment == dataLabelStrings.equipment_group ? '' : dataLabelStrings.equipment) + dataLabelStrings.component + dataLabelStrings.loop_point_type;
   dataLabelStrings.usedDLSs.push(dataLabelString);
   return dataLabelString;
 }
@@ -127,7 +128,7 @@ const addDataLabels = function(parent, current, level) {
         device: current.type + ' ' + current.subtype,
         dataLabel: makeDataLabel(),
         inputType: mp.loop_point_type,
-        unit: mp.measurement_type
+        unit: convertUnit(mp.measurement_type)
       });
     });
   } else {
