@@ -123,7 +123,7 @@ const addDataLabels = function(parent, current, level) {
         dataLabels[parent] = [];
       }
       dataLabels[parent].push({
-        level,
+        // level,
         device: current.type + ' ' + current.subtype,
         dataLabel: makeDataLabel(),
         inputType: mp.loop_point_type,
@@ -154,7 +154,7 @@ const recurse = (levels, levelIndex, nameCue) => {
   let level = levels[levelIndex];
   let current = findAndLoadYaml(level, convertName(nameCue));
   if (!current) {
-    log('{{red}}','Could not find file', '{{reset}}', ' for', Object.keys(nameCue), '!');
+    log('{{red}}','Could not find file', '{{reset}}', ' for', Object.keys(nameCue), 'at level', level, '!');
     return;
   }
   if (levelIndex == 0) { // If we're at the equipment_group level, set the parent
@@ -170,8 +170,19 @@ const recurse = (levels, levelIndex, nameCue) => {
   }
 }
 
+async function getOutputType() {
+  return prompts({
+    type: 'text',
+    name: 'type',
+    message: 'Print in console (p or ENTER), Save to file (s), Do nothing (x)',
+    initial: 'p'
+  });
+}
+
 // ==== inits ====
 // parent directory for files to parse
+let includeLevel = false;
+
 const parentDir = './equipmentFiles';
 
 // levels
@@ -213,21 +224,12 @@ startFiles.forEach(startFile => {
 log();
 log('All Done!');
 
-
-
-
-
 (async function () {
   log('How would you like the data labels?');
-  let output = await prompts({
-    type: 'text',
-    name: 'type',
-    message: 'Print in console (p), Save to file (s), Do nothing (x)',
-    initial: 'p'
-  });
+  let output = await getOutputType();
   let outputted = false;
   while (!outputted) {
-    switch (output.type.toLowerCase()) {
+    switch (output.type.toLowerCase().replace(/\s/g, '')) {
       case 'p':
         console.log(dataLabels);
         outputted = true;
@@ -260,16 +262,12 @@ log('All Done!');
         if (confirm.value.toLowerCase() == 'y') {
           outputted = true;
         } else if (confirm.value.toLowerCase() == 'n') {
-          output = await prompts({
-            type: 'text',
-            name: 'type',
-            message: 'Print in console (p), Save to file (s), Do nothing (x)',
-            initial: 'p'
-          });
+          output = await getOutputType();
         }
         break;
       default:
         log("I didn't recognize that input.")
+        output = await getOutputType();
     }
   }
 })();
