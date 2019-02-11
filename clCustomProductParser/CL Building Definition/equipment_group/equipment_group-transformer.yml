@@ -1,8 +1,0 @@
-# team_hint: BIG
-template_type: equipment_group
-type: Transformer
-subtype: Default
-measurement_points:
-child_equipment:
-  Transformer:
-    Default: "Transformer-1"

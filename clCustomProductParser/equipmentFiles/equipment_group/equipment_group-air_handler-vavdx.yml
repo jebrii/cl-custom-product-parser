@@ -1,7 +1,0 @@
-template_type: equipment_group
-type: AHU
-subtype: VavDx
-measurement_points:
-child_equipment:
-  AHU:
-    VavDx: "VAV_DX-1"

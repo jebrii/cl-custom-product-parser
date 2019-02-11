@@ -1,7 +1,0 @@
-template_type: component
-type: Damper
-subtype: Terminal
-properties:
-measurement_points:
-  - loop_point_type: Damper
-    measurement_type: Pcnt_Open

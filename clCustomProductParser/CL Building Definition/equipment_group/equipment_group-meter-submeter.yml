@@ -1,8 +1,0 @@
-template_type: equipment_group
-type: Meter
-subtype: Submeter
-properties:
-measurement_points:
-child_equipment:
-  Meter:
-    Electric: "SubmeterElectric-1"

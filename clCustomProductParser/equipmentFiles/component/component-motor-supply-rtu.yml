@@ -1,8 +1,0 @@
-# team hint: BIG
-template_type: component
-type: Motor
-subtype: SupplyRTU
-properties:
-  nameplate_hp:
-    type: number
-    collection_hint: field

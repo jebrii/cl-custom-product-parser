@@ -1,8 +1,0 @@
-# team hint: BIG
-template_type: equipment_group
-type: AHU
-subtype: RTU
-measurement_points:
-child_equipment:
-  AHU:
-    RTU: "RTU-1"

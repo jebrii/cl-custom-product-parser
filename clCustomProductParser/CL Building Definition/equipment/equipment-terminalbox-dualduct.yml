@@ -1,8 +1,0 @@
-template_type: equipment
-type: TerminalBox
-subtype: DualDuct
-measurement_points:
-  - loop_point_type: DA
-    measurement_type: T
-child_components:
-

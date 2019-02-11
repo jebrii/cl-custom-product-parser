@@ -1,7 +1,0 @@
-template_type: equipment_group
-type: HeatingAHU
-subtype: Default
-measurement_points:
-child_equipment:
-  HeatingAHU:
-    Default: "HD-1"

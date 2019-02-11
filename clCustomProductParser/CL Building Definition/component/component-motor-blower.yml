@@ -1,5 +1,0 @@
-template_type: component
-type: Motor
-subtype: Blower
-properties:
-measurement_points:

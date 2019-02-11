@@ -1,8 +1,0 @@
-# team hint: BIG
-template_type: component
-type: Fan
-subtype: SupplyRTU
-properties:
-  max_cfm:
-    type: number
-    collection_hint: field

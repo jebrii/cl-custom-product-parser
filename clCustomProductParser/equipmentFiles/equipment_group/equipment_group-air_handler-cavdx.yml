@@ -1,7 +1,0 @@
-template_type: equipment_group
-type: AHU
-subtype: CavDx
-measurement_points:
-child_equipment:
-  AHU:
-    CavDx: "CAV_DX-1"
