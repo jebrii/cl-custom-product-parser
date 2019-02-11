@@ -1,0 +1,7 @@
+# team hint: BIG
+template_type: component
+type: CoolingCoil
+subtype: RefrigerantRTU
+measurement_points:
+  - loop_point_type: SA
+    measurement_type: T

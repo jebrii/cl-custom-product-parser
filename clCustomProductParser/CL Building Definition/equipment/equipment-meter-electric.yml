@@ -1,0 +1,10 @@
+template_type: equipment
+type: Meter
+subtype: Electric
+properties:
+  index:
+    type: number
+measurement_points:
+  - loop_point_type: BldgElec
+    measurement_type: P
+child_components:

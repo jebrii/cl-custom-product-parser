@@ -1,0 +1,29 @@
+template_type: component
+type: Motor
+subtype: CwPump
+properties:
+  nameplate_hp:
+    type: number
+    collection_hint: field
+  motor_eff:
+    type: number
+    collection_hint: office
+  power_factor:
+    type: number
+    collection_hint: field
+  volt:
+    type: number
+    collection_hint: field
+  vfd_penalty_percent:
+    type: number
+    collection_hint: office
+  index:
+    type: number
+    collection_hint: field
+measurement_points:
+  - loop_point_type: CWPMotor
+    measurement_type: I
+  - loop_point_type: CWPMotor
+    measurement_type: P
+  - loop_point_type: Motor
+    measurement_type: Motor_Pcnt_On

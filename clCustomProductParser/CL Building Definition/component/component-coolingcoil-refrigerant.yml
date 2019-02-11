@@ -1,0 +1,8 @@
+template_type: component
+type: CoolingCoil
+subtype: Refrigerant
+measurement_points:
+  - loop_point_type: SA
+    measurement_type: T
+  - loop_point_type: SA
+    measurement_type: RH

@@ -1,0 +1,28 @@
+template_type: equipment
+type: Boiler
+subtype: NaturalGas
+properties:
+  percent_skin_loss:
+    type: number
+    collection_hint: office
+  boiler_capacity:
+    type: number
+    collection_hint: field
+  boiler_efficiency_as_list:
+    type: string
+    collection_hint: office
+  hwrt_at_efficiency_as_list:
+    type: string
+    collection_hint: office
+  condensing:
+    type: enumeration
+    values:
+      - Condensing
+      - Non-Condensing
+    collection_hint: field
+measurement_points:
+  - loop_point_type: Burner
+    measurement_type: Motor_Pcnt_On
+child_components:
+  Motor:
+    Blower: "Blower_Motor-1"

@@ -1,0 +1,39 @@
+template_type: equipment
+type: CoolingTower
+subtype: Default
+properties:
+  design_capacity:
+    type: number
+    collection_hint: office
+  design_cw_flow:
+    type: number
+    collection_hint: office
+  design_cwrt:
+    type: number
+    collection_hint: office
+  design_cwst:
+    type: number
+    collection_hint: office
+  design_oawbt:
+    type: number
+    collection_hint: office
+  ref_min_capacity:
+    type: number
+    collection_hint: office
+  design_approach:
+    type: number
+    collection_hint: office
+  static_head:
+    type: number
+    collection_hint: field
+  index:
+    type: number
+    collection_hint: field
+measurement_points:
+  - loop_point_type: CT
+    measurement_type: P
+child_components:
+  Motor:
+    CoolingTowerFan: "CTF_Motor-1"
+  Fan:
+    CoolingTower: "CTF-1"

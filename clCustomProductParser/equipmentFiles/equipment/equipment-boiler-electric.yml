@@ -1,0 +1,28 @@
+template_type: equipment
+type: Boiler
+subtype: Electric
+properties:
+  percent_skin_loss:
+    type: number
+    collection_hint: office
+  boiler_capacity:
+    type: number
+    collection_hint: field
+  boiler_efficiency:
+    type: number
+    collection_hint: office
+    default: 0.99
+  power_factor:
+    type: number
+    collection_hint: field
+  volt:
+    type: number
+    collection_hint: field
+measurement_points:
+  - loop_point_type: Burner
+    measurement_type: Motor_Pcnt_On
+  - loop_point_type: Burner
+    measurement_type: I
+  - loop_point_type: Burner
+    measurement_type: P
+child_components:

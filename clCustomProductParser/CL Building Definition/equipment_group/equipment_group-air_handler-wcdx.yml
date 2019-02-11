@@ -1,0 +1,7 @@
+template_type: equipment_group
+type: AHU
+subtype: WCDX
+measurement_points:
+child_equipment:
+  AHU:
+    WCDX: "WCDX-1"

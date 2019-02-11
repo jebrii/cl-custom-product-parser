@@ -1,0 +1,21 @@
+template_type: equipment_group
+type: Chiller
+subtype: Default
+properties:
+  variable_speed:
+    type: boolean
+    collection_hint: field
+measurement_points:
+  - loop_point_type: CHWR
+    measurement_type: T
+  - loop_point_type: CHWS
+    measurement_type: T
+  - loop_point_type: CHWLoop
+    measurement_type: dT
+  - loop_point_type: Bypass
+    measurement_type: Pcnt_Open
+  - loop_point_type: CHWLoop
+    measurement_type: Tons
+child_equipment:
+  Chiller:
+    Default: "Chiller-1"

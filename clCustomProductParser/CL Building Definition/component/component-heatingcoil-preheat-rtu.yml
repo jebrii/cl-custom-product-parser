@@ -1,0 +1,21 @@
+# team hint: BIG
+template_type: component
+type: HeatingCoil
+subtype: PreheatRTU
+properties:
+  heating_source:
+    type: enumeration
+    values:
+      - natural_gas
+      - electric
+      - steam
+    collection_hint: field
+  preheat:
+    type: enumeration
+    values:
+      - with_preheat
+      - no_preheat
+    collection_hint: field
+  preheat_efficiency:
+    type: number
+    collection_hint: field

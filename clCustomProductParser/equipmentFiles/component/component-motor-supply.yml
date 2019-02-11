@@ -1,0 +1,23 @@
+template_type: component
+type: Motor
+subtype: Supply
+properties:
+  nameplate_hp:
+    type: number
+    collection_hint: field
+  power_factor:
+    type: number
+    collection_hint: field
+  volt:
+    type: number
+    collection_hint: field
+  static_dsp_setpoint_wc:
+    type: number
+    collection_hint: field
+measurement_points:
+  - loop_point_type: SF
+    measurement_type: I
+  - loop_point_type: SF
+    measurement_type: P
+  - loop_point_type: Motor
+    measurement_type: Motor_Pcnt_On
